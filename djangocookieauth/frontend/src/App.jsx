@@ -36,7 +36,7 @@ class App extends React.Component {
 
   whoami = () => {
     fetch('/api/whoami/', {
-      "Content-Type": "application/json",
+      headers: { "Content-Type": "application/json", },
       credentials: "same-origin",
     })
       .then((response) => response.json())
@@ -131,16 +131,17 @@ class App extends React.Component {
           </form>
         </div>
       )
-    };
-    return (
-      <div className="container-mt-3">
-        <h1>React Cookie auth</h1>
-        <p>You are logged in.</p>
-        <button className="btn btn-primary-mr-2">WhoAmI</button>
-        <button className="btn btn-primary-mr-2">LOG OUT</button>
-      </div>
-    )
+    } else {
+      return (
+        <div className="container-mt-3">
+          <h1>React Cookie auth</h1>
+          <p>You are logged in.</p>
+          <button className="btn btn-primary" onClick={this.whoami}>WhoAmI</button>
+          <button className="btn btn-danger" onClick={this.logout}>LOG OUT</button>
+        </div>
+      )
+    }
   }
-}
+};
 
 export default App
